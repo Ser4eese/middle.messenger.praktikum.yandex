@@ -1,0 +1,23 @@
+.chats-lists {
+    background-color: $chats-list;
+    border-right: 2px solid $gray-light;
+    &__items {
+        margin: 0px;
+        padding: 0px;
+    }
+    &__profile {
+        display: flex;
+        justify-content: flex-end;
+        padding: 21px 10px;
+        text-decoration: none !important;
+        &-arrow {
+            padding: 5px;
+        }
+    }
+    &__search {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        border-bottom: 2px solid $gray-light;
+    }
+}

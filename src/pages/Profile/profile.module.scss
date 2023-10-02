@@ -1,0 +1,62 @@
+.profile {
+    display: grid;
+    grid-template-columns: 5% 95%;
+    grid-template-rows: 100vh;
+    width: 100vw;
+
+    &__container {
+        background-color: $white;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        &-avatar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 21px;
+        }
+        &-data {
+            flex-direction: column;
+            display: flex;
+            width: 510px;
+            gap: 10px;
+        }
+        &-actions {
+            padding-top: 50px;
+            gap: 10px;
+            width: 510px;
+            flex-direction: column;
+            display: flex;
+            justify-content: flex-start;
+            &_change {
+                border-bottom: 2px solid $gray-light;
+            }
+        }
+    }
+    &__item {
+        padding: 5px 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid $gray-light;
+        font-size: 13px;
+        &-label {
+            font-weight: 600;
+        }
+        &-value {
+            color: $gray;
+        }
+    }
+    &__back {
+        background-color: $chats-list;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-right: 2px solid $gray-light;
+        &-button {
+            transform: rotate(180deg);
+        }
+    }
+}
