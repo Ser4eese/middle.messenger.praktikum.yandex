@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base=/",
-    "start": "tsc && vite build --base=/ && node server.js"
+    "build": "tsc && vite build",
+    "start": "tsc && vite build && node server.js"
   },
   "devDependencies": {
     "sass": "^1.68.0",
