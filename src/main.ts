@@ -21,6 +21,5 @@ const ROUTER: Record<string, string> = {
 
 window.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('app');
-    console.log(window.location.pathname)
     if (root) root.innerHTML = ROUTER[window.location.pathname] || NotFound()
 })

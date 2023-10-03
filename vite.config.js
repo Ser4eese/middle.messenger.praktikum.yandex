@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import handlebars from 'vite-plugin-handlebars';
 import { resolve } from 'path';
-console.log(resolve(__dirname, 'src/components/Input'))
 export default defineConfig({
   base: './',
     plugins: [handlebars({
