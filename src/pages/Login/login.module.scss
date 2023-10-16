@@ -1,0 +1,38 @@
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-image: url('/login_background.jpg');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.login-form {
+        width: 340px;
+        height: 450px;
+        padding: 30px;
+        background-color: #fff;
+        justify-content: center;
+        align-items: flex-start;
+        display: grid;
+        grid-template-rows: 100px calc(100% - 200px) 100px;
+        border-radius: 10px;
+        &__title {
+            text-align: center;
+        }
+        &__input {
+            height: max-content;
+        }
+        &__action {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+            justify-content: center;
+        }
+}

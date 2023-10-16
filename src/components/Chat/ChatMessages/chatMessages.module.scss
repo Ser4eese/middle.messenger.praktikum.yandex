@@ -1,0 +1,40 @@
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100%;
+    padding: 0 20px;
+    &__header {
+        border-bottom: 2px solid $gray-light;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        &-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+    }
+    &__content {
+        border-bottom: 2px solid $gray-light;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        gap: 10px;
+        padding: 10px 0px;
+        &::-webkit-scrollbar {
+			display: none;
+		}
+		& {
+			-ms-overflow-style: none;
+			scrollbar-width: none;
+		}
+    }
+    &__footer {
+        gap: 10px;
+        padding: 11px 0;
+        display: flex;
+        align-items: center;
+    }
+}

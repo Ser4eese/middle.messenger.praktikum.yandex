@@ -1,0 +1,19 @@
+body, html {
+    font-family: Roboto,sans-serif;
+    margin: 0;
+}
+
+.link {
+    text-decoration: none;
+    text-align: center;
+    color: $link;
+}
+.link.profile-link {
+    text-align: start;
+    &__exit {
+        color: $error;
+    }
+}
+.gray-text {
+    color: $gray;
+}

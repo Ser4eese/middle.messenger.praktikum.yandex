@@ -1,0 +1,11 @@
+.profile-input {
+    &__field {
+        width: 100%;
+        height: 20px;
+        border: none;
+        border-bottom: px solid $main;
+    }
+    &__label {
+        color: $gray;
+    }
+}
