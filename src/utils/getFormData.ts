@@ -7,6 +7,6 @@ export const getFormData = (event: SubmitEvent): Record<string, string> => {
         formData[input.name] = input.value;
         input.dispatchEvent(new Event('blur'));
     });
-    console.log(formData);
+    console.info(formData);
     return formData;
 };

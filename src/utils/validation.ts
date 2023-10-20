@@ -1,4 +1,4 @@
-const validationRules = new Map<string,(...args: any) => string | boolean>([
+const validationRules = new Map<string, any>([
     ['name-valid', (value: string) => !/^[А-ЯA-ZЁ][а-яёA-Za-z-]*$/g.test(value) && `латиница или кириллица,
 первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (допустим только дефис).`],
     ['login-valid', (value: string) => !/^(?![0-9_-]+$)[A-Za-z0-9_-]{3,20}$/g.test(value)
