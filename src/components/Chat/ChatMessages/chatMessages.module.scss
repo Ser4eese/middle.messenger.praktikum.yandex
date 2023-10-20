@@ -19,22 +19,20 @@
         }
     }
 
-    &__content-container {
+    &__content {
         border-bottom: 2px solid $gray-light;
         display: flex;
         flex-direction: column;
         overflow: auto;
         gap: 10px;
         padding: 10px 0;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
 
         &::-webkit-scrollbar {
 			display: none;
 		}
 
-		& {
-			-ms-overflow-style: none;
-			scrollbar-width: none;
-		}
     }
 
     &__footer {
