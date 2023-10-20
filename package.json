@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "linter:ts": "eslint \"**/*.{ts,js}\" && tsc --noEmit",
-    "linter:ts:fix": "eslint \"**/*.{ts,js}\" --fix",
-    "linter:scss": "npx stylelint \"**/*.scss\"",
-    "linter:scss:fix": "npx stylelint \"**/*.scss\" --fix",
+    "eslint:ts": "eslint \"**/*.{ts,js}\" && tsc --noEmit",
+    "eslint:fix": "eslint \"**/*.{ts,js}\" --fix",
+    "lint:scss": "npx stylelint \"**/*.scss\"",
+    "lint:fix": "npx stylelint \"**/*.scss\" --fix",
     "start": "tsc && vite build && node server.js"
   },
   "devDependencies": {
