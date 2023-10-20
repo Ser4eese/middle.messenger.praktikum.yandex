@@ -3,6 +3,7 @@ import { Block } from '../../utils/block.ts';
 import Button from '../../components/Button/index.ts';
 import ProfileInput from '../../components/ProfileInput/index.ts';
 import { getFormData } from '../../utils/getFormData.ts';
+import { IProfileInputProps } from '@/components/ProfileInput/profileInput.props.ts';
 
 const user = {
     login: 'ivanivanov',
@@ -13,7 +14,7 @@ const user = {
     display_name: 'test',
 };
 const type = 'text';
-const profileInputProps = [{
+const profileInputProps: IProfileInputProps[] = [{
     name: 'email',
     required: true,
     placeholder: user.email,

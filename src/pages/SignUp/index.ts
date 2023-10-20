@@ -4,10 +4,11 @@ import { Block } from '../../utils/block.ts';
 import Input from '../../components/Input/index.ts';
 import Button from '../../components/Button/index.ts';
 import { getFormData } from '../../utils/getFormData.ts';
+import { IInputProps } from '@/components/Input/input.props.ts';
 
 const type = 'text';
 const required = true;
-const input = [{
+const input: IInputProps[] = [{
     name: 'email', type, title: 'Почта', required, rules: ['email-valid'],
 },
 {

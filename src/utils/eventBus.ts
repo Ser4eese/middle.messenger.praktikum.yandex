@@ -31,7 +31,7 @@ export default class EventBus {
         return this;
     }
 
-    emit(event: string, ...args: number[]) {
+    emit(event: string, ...args: any[]) {
         const { listeners } = this;
         const callbacks = listeners.get(event);
 

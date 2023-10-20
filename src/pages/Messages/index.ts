@@ -10,7 +10,7 @@ export default class Messages extends Block {
         super('div', {
             style: 'messages-container',
             children: {
-                chatsList: new ChatList({}),
+                chatsList: new ChatList(),
                 chatMessages: new ChatMessages({ name: 'Test' }),
             },
         });
