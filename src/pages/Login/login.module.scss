@@ -7,11 +7,13 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .login-container {
     height: 100vh;
     display: flex;
     align-items: center;
 }
+
 .login-form {
         width: 340px;
         height: 450px;
@@ -22,12 +24,15 @@ body {
         display: grid;
         grid-template-rows: 100px calc(100% - 200px) 100px;
         border-radius: 10px;
+
         &__title {
             text-align: center;
         }
+
         &__input {
             height: max-content;
         }
+
         &__action {
             display: flex;
             flex-direction: column;

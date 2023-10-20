@@ -1,6 +1,14 @@
-import { tmpl } from "./error.tpl"
-import Handlebars from "handlebars"
+import { tmpl } from './error.tpl';
+import { Block } from '../../utils/block.ts';
 
-export const ErrorPage = () => {
-    return Handlebars.compile(tmpl)({})
+export default class ErrorPage extends Block {
+    constructor() {
+        super('div', {
+            style: 'error-page',
+        });
+    }
+
+    render(): DocumentFragment {
+        return this.compile(tmpl, this.props);
+    }
 }

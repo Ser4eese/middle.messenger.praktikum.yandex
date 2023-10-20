@@ -8,12 +8,25 @@ body, html {
     text-align: center;
     color: $link;
 }
+
 .link.profile-link {
     text-align: start;
+
     &__exit {
         color: $error;
     }
 }
+
 .gray-text {
     color: $gray;
+}
+
+.error-field {
+    color: $error;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
 }

@@ -1,6 +1,5 @@
-
 import Handlebars from 'handlebars';
-import { input } from "./Input/input.tpl";
+import { input } from './Input/input.tpl';
 import { button } from './Button/button.tpl';
 import { chatInput } from './Chat/ChatInput/chatInput.tpl';
 import { chatItem } from './Chat/ChatItem/chatItem.tpl';

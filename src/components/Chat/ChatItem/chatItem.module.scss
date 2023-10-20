@@ -3,11 +3,14 @@
     padding: 10px;
     display: flex;
     gap: 10px;
+
     &__content {
         width: 100%;
+
         &-header {
             display: flex;
             justify-content: space-between;
+
             &-title {
                 font-weight: 600;
             }
