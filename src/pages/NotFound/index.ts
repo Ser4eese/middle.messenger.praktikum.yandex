@@ -3,7 +3,7 @@ import { Block } from '../../utils/block.ts';
 
 export default class NotFound extends Block {
     constructor() {
-        super('div', {
+        super({
             style: 'not-found',
         });
     }

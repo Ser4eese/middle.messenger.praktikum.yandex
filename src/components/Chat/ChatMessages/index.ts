@@ -45,9 +45,9 @@ const messageList: IMessageCardProps[] = [
     { date: '18:56', text: 'Привет', isAuthor: false },
 ];
 
-export default class ChatMessages extends Block {
+export default class ChatMessages extends Block<IChatMessagesProps> {
     constructor(props: IChatMessagesProps) {
-        super('div', {
+        super({
             style: 'chat-messages',
             ...props,
             children: {

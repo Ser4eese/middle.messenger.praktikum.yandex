@@ -2,9 +2,9 @@ import { Block } from '../../../utils/block.ts';
 import { type IChatInputProps } from './chatInput.props.ts';
 import { chatInput } from './chatInput.tpl.ts';
 
-export default class ChatInput extends Block {
+export default class ChatInput extends Block<IChatInputProps> {
     constructor(props: IChatInputProps) {
-        super('div', { ...props, style: 'input-chat' });
+        super({ ...props, style: 'input-chat' });
     }
 
     render(): DocumentFragment {

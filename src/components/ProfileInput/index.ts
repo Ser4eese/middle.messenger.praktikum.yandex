@@ -3,9 +3,9 @@ import { validate } from '../../utils/validation.ts';
 import { IProfileInputProps } from './profileInput.props.ts';
 import { profileInput } from './profileInput.tpl.ts';
 
-export default class ProfileInput extends Block {
+export default class ProfileInput extends Block<IProfileInputProps> {
     constructor(props: IProfileInputProps) {
-        super('div', {
+        super({
             ...props,
             style: 'profile__item',
             events: {

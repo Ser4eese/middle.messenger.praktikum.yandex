@@ -4,7 +4,14 @@ import EventBus from './eventBus';
 
 type ObjectType = Record<string, any>
 
-export class Block {
+type DefaultProps = {
+    style?: string | string[],
+    events?: Record<string, any>,
+    // eslint-disable-next-line no-use-before-define
+    children?: unknown | unknown[]
+}
+
+export abstract class Block<Props extends Record<string, any> = any> {
     static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',
@@ -14,7 +21,7 @@ export class Block {
 
     eventBus: () => EventBus;
 
-    props: ObjectType = {};
+    props: Props;
 
     // eslint-disable-next-line no-use-before-define
     children: Record<string, Block> = {};
@@ -31,7 +38,7 @@ export class Block {
      *
      * @returns {void}
      */
-    constructor(tagName: string = 'div', props: object = {}) {
+    constructor(props: Props & DefaultProps, tagName: string = 'div') {
         const eventBus = new EventBus();
         this._meta = {
             tagName,
@@ -167,10 +174,9 @@ export class Block {
 
     _deleteEvents(): void {
         const { events = {} } = this.props;
-
         Object.keys((events as ObjectType)).forEach((eventName) => {
             if (eventName === 'blur') {
-                this._element.querySelector('input')?.addEventListener(eventName, events[eventName]);
+                this._element.querySelector('input')?.removeEventListener(eventName, events[eventName]);
             } else {
                 this._element.removeEventListener(eventName, events[eventName]);
             }
@@ -181,19 +187,19 @@ export class Block {
         return this.element;
     }
 
-    _makePropsProxy(props: ObjectType): ObjectType {
+    _makePropsProxy(props: Props): Props {
     // Можно и так передать this
     // Такой способ больше не применяется с приходом ES6+
         const self = this;
 
         return new Proxy(props, {
             get(target, prop) {
-                const value = target[prop as string];
+                const value = target[prop as keyof Props];
                 return typeof value === 'function' ? value.bind(target) : value;
             },
             set(target, prop, value) {
                 // eslint-disable-next-line no-param-reassign
-                target[prop as string] = value;
+                target[prop as keyof Props] = value;
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
                 return true;
             },

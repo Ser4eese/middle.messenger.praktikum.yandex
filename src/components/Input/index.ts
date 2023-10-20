@@ -3,9 +3,9 @@ import { Block } from '../../utils/block.ts';
 import { validate } from '../../utils/validation.ts';
 import { IInputProps } from './input.props.ts';
 
-export default class Input extends Block {
+export default class Input extends Block<IInputProps> {
     constructor(props: IInputProps) {
-        super('div', {
+        super({
             ...props,
             style: 'input',
             events: {

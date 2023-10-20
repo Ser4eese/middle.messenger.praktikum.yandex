@@ -3,7 +3,7 @@ import { Block } from '../../utils/block.ts';
 
 export default class ErrorPage extends Block {
     constructor() {
-        super('div', {
+        super({
             style: 'error-page',
         });
     }

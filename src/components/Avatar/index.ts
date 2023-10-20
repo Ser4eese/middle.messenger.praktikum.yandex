@@ -3,7 +3,7 @@ import { Block } from '../../utils/block.ts';
 
 export default class Avatar extends Block {
     constructor() {
-        super('div', {
+        super({
             style: 'avatar',
         });
     }

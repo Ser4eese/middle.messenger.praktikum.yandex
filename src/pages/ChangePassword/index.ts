@@ -40,7 +40,7 @@ const profileInputProps = [{
 ];
 export default class ChangePassword extends Block {
     constructor() {
-        super('div', {
+        super({
             style: 'profile',
             user,
             children: {

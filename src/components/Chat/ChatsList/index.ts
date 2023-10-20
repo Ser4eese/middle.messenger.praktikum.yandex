@@ -41,7 +41,7 @@ const chatList: IChatItem[] = [{
 
 export default class ChatList extends Block {
     constructor() {
-        super('div', {
+        super({
             chatList,
             style: 'chats-lists',
             children: {

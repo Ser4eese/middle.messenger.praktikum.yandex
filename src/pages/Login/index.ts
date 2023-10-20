@@ -19,7 +19,7 @@ const input = [new Input({
 })];
 export default class Login extends Block {
     constructor() {
-        super('div', {
+        super({
             style: 'login-container',
             children: {
                 input,

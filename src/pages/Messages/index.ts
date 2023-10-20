@@ -7,7 +7,7 @@ import ChatMessages from '../../components/Chat/ChatMessages/index.ts';
 
 export default class Messages extends Block {
     constructor() {
-        super('div', {
+        super({
             style: 'messages-container',
             children: {
                 chatsList: new ChatList(),

@@ -32,7 +32,7 @@ const input: IInputProps[] = [{
 ];
 export default class SignUp extends Block {
     constructor() {
-        super('div', {
+        super({
             style: 'register-container',
             events: {
                 submit: getFormData,

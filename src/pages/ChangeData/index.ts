@@ -64,7 +64,7 @@ const profileInputProps: IProfileInputProps[] = [{
 ];
 export default class ChangeData extends Block {
     constructor() {
-        super('div', {
+        super({
             style: 'profile',
             user,
             children: {

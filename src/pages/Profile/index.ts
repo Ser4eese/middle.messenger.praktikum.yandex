@@ -12,7 +12,7 @@ const user = {
 
 export default class Profile extends Block {
     constructor() {
-        super('div', {
+        super({
             style: 'profile',
             user,
         });
