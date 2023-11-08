@@ -1,5 +1,4 @@
-export const tmpl = `<div class="profile">
-<div class="profile__back">
+export const tmpl = `<div class="profile__back">
     <a href="/"><span><img alt="icon" class="profile__back-button" src="send.svg" /></span></a>
 </div>
     <div class="profile__container">
@@ -38,5 +37,4 @@ export const tmpl = `<div class="profile">
             <a href="/change-password" class="link profile-link"><div class="profile__container-actions_change">Изменить пароль</div></a>
             <a href="/login" class="link profile-link profile-link__exit"><div class="profile__container-actions_exit">Выйти</div></a>
         </div>
-    </div>
-</div>`;
+    </div>`;

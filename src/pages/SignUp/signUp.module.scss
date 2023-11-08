@@ -8,14 +8,16 @@ body {
     justify-content: center;
     height: 90%;
 }
+
 .register-container {
     height: 100vh;
     display: flex;
     align-items: center;
 }
+
 .register-form {
         width: 340px;
-        height: 615px;
+        min-height: 615px;
         padding: 30px;
         background-color: #fff;
         justify-content: center;
@@ -23,12 +25,15 @@ body {
         display: grid;
         grid-template-rows: 100px calc(100% - 200px) 100px;
         border-radius: 10px;
+
         &__title {
             text-align: center;
         }
+
         &__input {
             height: max-content;
         }
+
         &__action {
             display: flex;
             flex-direction: column;
