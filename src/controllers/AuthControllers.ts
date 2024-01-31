@@ -5,13 +5,8 @@ import { Routes } from '../main';
 
 export class AuthController {
     static async fetchUser() {
-        try {
-            const user = await authApi.getUser();
-            store.set('user', user);
-        } catch (e) {
-            if (e instanceof Error && 'reason' in e) console.error(e.reason);
-            console.error(e);
-        }
+        const user = await authApi.getUser();
+        store.set('user', user);
     }
 
     static async signin(data: ISigninData) {
