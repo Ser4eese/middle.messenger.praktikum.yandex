@@ -1,11 +1,25 @@
-export const tmpl = `<div class="chat-messages__header">
-<div class="chat-messages__header-left">{{{avatar}}}{{name}}</div>
-<img alt="icon" class="chats-lists__profile-arrow" src="settings.svg" />
+export const tmpl = `{{#if selectedChat}}<div class="chat-messages__header">
+<div class="chat-messages-header-left">{{{avatar}}}{{chat.title}}</div>
+<div class="chat-messages-header-button">
+<div class="chat-messages-header-button-action">
+  <img alt="icon" src="settings.svg">
+  <div class="chat-messages-header-list">
+    <div>
+    {{{addUser}}}
+    </div>
+    <div>
+    {{{addUser}}}
+    </div>
+    <div>
+    {{{deleteUser}}}
+    </div>
+  </div>
 </div>
-<div class="chat-messages__content">
+</div>
+</div>
 {{{messageCards}}}
-</div>
-<div class="chat-messages__footer">
+<form class="chat-messages__footer">
 {{{ chatInput }}}
-<img alt="icon" src="send.svg" />   
-</div>`;
+{{{ buttonIcon }}}
+</form>
+{{/if}}`;

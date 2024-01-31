@@ -1,5 +1,5 @@
 import { input } from './input.tpl.ts';
-import { Block } from '../../utils/block.ts';
+import { Block } from '../../core/Block/Block.ts';
 import { validate } from '../../utils/validation.ts';
 import { IInputProps } from './input.props.ts';
 

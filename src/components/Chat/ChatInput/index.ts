@@ -1,4 +1,4 @@
-import { Block } from '../../../utils/block.ts';
+import { Block } from '../../../core/Block/Block.ts';
 import { type IChatInputProps } from './chatInput.props.ts';
 import { chatInput } from './chatInput.tpl.ts';
 

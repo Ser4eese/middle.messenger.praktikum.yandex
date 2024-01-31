@@ -6,11 +6,16 @@ import { chatItem } from './Chat/ChatItem/chatItem.tpl';
 import { avatar } from './Avatar/avatar.tpl';
 import { messageCard } from './Chat/MessageCard/messageCard.tpl';
 import { profileInput } from './ProfileInput/profileInput.tpl';
+import { tmpl as buttonText } from './ButtonText/ButtonText.tpl';
+import { popup } from './Popup/Popup.tpl';
 
 Handlebars.registerPartial('input', input);
+Handlebars.registerPartial('buttonText', buttonText);
 Handlebars.registerPartial('button', button);
 Handlebars.registerPartial('chatInput', chatInput);
 Handlebars.registerPartial('chatItem', chatItem);
 Handlebars.registerPartial('avatar', avatar);
 Handlebars.registerPartial('messageCard', messageCard);
 Handlebars.registerPartial('profileInput', profileInput);
+Handlebars.registerPartial('popup', popup);
+Handlebars.registerHelper('eq', (a, b) => a === b);

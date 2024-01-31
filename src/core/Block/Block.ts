@@ -1,16 +1,16 @@
 import Handlebars from 'handlebars';
 import { nanoid } from 'nanoid';
-import EventBus from './eventBus';
+import isEqual from '../../utils/isEqual';
+import EventBus from '../EventBus/EventBus';
 
+Handlebars.registerHelper('eq', (a, b) => a === b);
 type ObjectType = Record<string, any>
-
-type DefaultProps = {
+export type DefaultProps = {
     style?: string | string[],
     events?: Record<string, any>,
     // eslint-disable-next-line no-use-before-define
     children?: unknown | unknown[]
 }
-
 export abstract class Block<Props extends Record<string, any> = any> {
     static EVENTS = {
         INIT: 'init',
@@ -44,7 +44,6 @@ export abstract class Block<Props extends Record<string, any> = any> {
             tagName,
             props,
         };
-
         this.props = this._makePropsProxy(props);
         this._setChildren();
         this.eventBus = () => eventBus;
@@ -66,7 +65,7 @@ export abstract class Block<Props extends Record<string, any> = any> {
         this._addStyles();
     }
 
-    initChildren(): void {}
+    initChildren(): void { }
 
     init(): void {
         this._createResources();
@@ -78,10 +77,19 @@ export abstract class Block<Props extends Record<string, any> = any> {
         this.componentDidMount();
     }
 
-    componentDidMount(_oldProps?: ObjectType): void {}
+    componentDidMount(_oldProps?: ObjectType): void { }
 
     dispatchComponentDidMount(): void {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+        Object.values(this.children).forEach((child) => {
+            if (Array.isArray(child)) {
+                child.forEach((ch) => {
+                    ch.dispatchComponentDidMount();
+                });
+            } else {
+                child.dispatchComponentDidMount();
+            }
+        });
     }
 
     _componentDidUpdate(oldProps: ObjectType, newProps: ObjectType): void {
@@ -90,19 +98,19 @@ export abstract class Block<Props extends Record<string, any> = any> {
             return;
         }
         Object.assign(oldProps, newProps);
-        this._render();
+        this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
     componentDidUpdate(_oldProps: ObjectType, _newProps: ObjectType): boolean {
-        return true;
+        return isEqual(_oldProps, _newProps);
     }
 
     setProps = (nextProps: ObjectType): void => {
         if (!nextProps) {
             return;
         }
-        this._componentDidUpdate(this.props, nextProps);
-    // Object.assign(this.props, nextProps)
+        // this._componentDidUpdate(this.props, nextProps);
+        Object.assign(this.props, nextProps);
     };
 
     get element(): HTMLElement {
@@ -119,11 +127,12 @@ export abstract class Block<Props extends Record<string, any> = any> {
         this._element.innerHTML = '';
         this._element.append(block);
         this._setEvents();
+        this.dispatchComponentDidMount();
     }
 
-    render(): any {}
+    render(): any { }
 
-    compile(template: string, context: ObjectType): DocumentFragment {
+    compile(template: string, context: ObjectType & DefaultProps): DocumentFragment {
         const contextAndStubs = { ...context };
         const arraysElementMap = new Map();
         Object.entries(this.children).forEach(([name, child]: [string, any]) => {
@@ -131,7 +140,6 @@ export abstract class Block<Props extends Record<string, any> = any> {
                 const arrayElementsId = nanoid();
                 contextAndStubs[name] = `<div data-id="${arrayElementsId}"></div>`;
                 arraysElementMap.set(name, arrayElementsId);
-                // console.log(arraysElementMap)
             } else contextAndStubs[name] = `<div data-id="${child._id}"></div>`;
         });
         const temp = document.createElement('template');
@@ -188,8 +196,8 @@ export abstract class Block<Props extends Record<string, any> = any> {
     }
 
     _makePropsProxy(props: Props): Props {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
+        // Можно и так передать this
+        // Такой способ больше не применяется с приходом ES6+
         const self = this;
 
         return new Proxy(props, {
@@ -210,7 +218,7 @@ export abstract class Block<Props extends Record<string, any> = any> {
     }
 
     _createDocumentElement(tagName: string): HTMLElement {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
+        // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
         return document.createElement(tagName);
     }
 
@@ -224,7 +232,7 @@ export abstract class Block<Props extends Record<string, any> = any> {
     }
 
     show(): void {
-        this.getContent().style.display = 'block';
+        this.getContent().style.display = '';
     }
 
     hide(): void {

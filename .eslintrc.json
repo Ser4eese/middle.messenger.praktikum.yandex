@@ -9,7 +9,7 @@
             "error",
             {
                 "allow": [
-                    "info"
+                    "error"
                 ]
             }
         ],

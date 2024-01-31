@@ -1,57 +1,37 @@
-import { Block } from '../../../utils/block';
+import { Block } from '../../../core/Block/Block';
 import ChatInput from '../ChatInput';
 import ChatItem from '../ChatItem';
-import { type IChatItem } from '../ChatItem/chatItem.props';
 import { tmpl } from './ChatsList.tpl';
+import { PopupTypes } from '../../../core/Store/store';
+import ButtonText from '../../../components/ButtonText/index';
+import { PopupController } from '../../../controllers/PopupController';
+import Popup from '../../../components/Popup/index';
 
-// export const ChatsList = () => {
-const chatList: IChatItem[] = [{
-    chatName: 'Андрей',
-    lastDate: '10:49',
-    message: 'Привет!',
-}, {
-    chatName: 'Андрей',
-    lastDate: '10:49',
-    message: 'Привет!',
-}, {
-    chatName: 'Андрей',
-    lastDate: '10:49',
-    message: 'Привет!',
-}, {
-    chatName: 'Андрей',
-    lastDate: '10:49',
-    message: 'Привет!',
-}, {
-    chatName: 'Андрей',
-    lastDate: '10:49',
-    message: 'Привет!',
-}, {
-    chatName: 'Андрей',
-    lastDate: '10:49',
-    message: 'Привет!',
-}, {
-    chatName: 'Андрей',
-    lastDate: '10:49',
-    message: 'Привет!',
-}, {
-    chatName: 'Андрей',
-    lastDate: '10:49',
-    message: 'Привет!',
-}];
+const onClick = () => {
+    PopupController.open(PopupTypes.CREATE_CHAT);
+};
 
 export default class ChatList extends Block {
-    constructor() {
+    constructor(props: any) {
         super({
-            chatList,
+            ...props,
             style: 'chats-lists',
             children: {
-                chatItems: chatList.map((chatProps) => new ChatItem(chatProps)),
+                buttonText: new ButtonText({
+                    text: 'Создать чат',
+                    style: 'chats-lists__create-chat',
+                    events: {
+                        click: onClick,
+                    },
+                }),
+                chatItems: new ChatItem({ ...props }),
                 chatInput: new ChatInput({
                     name: 'search',
                     type: 'text',
                     placeholder: 'Поиск',
                     required: false,
                 }),
+                popup: new Popup({}),
             },
         });
     }

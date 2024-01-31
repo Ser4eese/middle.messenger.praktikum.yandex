@@ -1,2 +1,1 @@
-export const button = `
-<div class="button__content">{{text}}</div>`;
+export const button = '<div class="button__content">{{text}}</div>';

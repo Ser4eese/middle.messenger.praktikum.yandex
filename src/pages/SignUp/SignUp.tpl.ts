@@ -4,7 +4,7 @@ export const tmpl = `<form action="" method="get" class="register-form">
         {{{inputs}}}
       </div>
       <div class="login-form__action">
-      <a href="/">{{{ button }}}</a>
-      <a href="/login" class="link">Войти</a>
+      <a href="/messenger">{{{ button }}}</a>
+      <a href="/" class="link">Войти</a>
       </div>
 </form>`;

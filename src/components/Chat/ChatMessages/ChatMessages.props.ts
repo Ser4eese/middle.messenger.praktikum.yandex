@@ -1,3 +1,4 @@
 export interface IChatMessagesProps {
-    name: string
+    name: string,
+    selectedChat?: number,
 }

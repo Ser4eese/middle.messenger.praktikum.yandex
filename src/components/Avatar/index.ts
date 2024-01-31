@@ -1,5 +1,5 @@
 import { avatar } from './avatar.tpl.ts';
-import { Block } from '../../utils/block.ts';
+import { Block } from '../../core/Block/Block.ts';
 
 export default class Avatar extends Block {
     constructor() {

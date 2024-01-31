@@ -1,5 +1,5 @@
 import { tmpl } from './error.tpl';
-import { Block } from '../../utils/block.ts';
+import { Block } from '../../core/Block/Block.ts';
 
 export default class ErrorPage extends Block {
     constructor() {

@@ -1,9 +1,9 @@
-export const tmpl = `<a href="/profile">
-<div class="chats-lists__profile gray-text">Профиль 
+export const tmpl = `<div class="chats-lists__header">
+{{{buttonText}}}
+<a class="chats-lists__profile gray-text" href="/profile">
+Профиль 
 <img alt="icon" class="chats-lists__profile-arrow" src="arrow.svg" />
-</div>
-</a>
+</a></div>
 <div class="chats-lists__search">{{{chatInput}}}</div>
-<ul class="chats-lists__items">
 {{{chatItems}}}
-</ul>`;
+{{{popup}}}`;

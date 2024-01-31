@@ -1,0 +1,13 @@
+.add-user {
+    display: flex;
+    flex-direction: column;
+    max-height: 200px;
+    overflow: auto;
+
+    &__card {
+        border: 2px solid $main;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 5px 0;
+    }
+}
