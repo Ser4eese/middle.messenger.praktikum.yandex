@@ -1,4 +1,4 @@
-export const tmpl = `{{#if selectedChat}}<div class="chat-messages__header">
+export const tmpl = `{{#if selectedChat}}<div class="chat-messages-header">
 <div class="chat-messages-header-left">{{{avatar}}}{{chat.title}}</div>
 <div class="chat-messages-header-button">
 <div class="chat-messages-header-button-action">
