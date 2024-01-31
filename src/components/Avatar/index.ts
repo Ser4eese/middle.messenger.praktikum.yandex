@@ -1,9 +1,12 @@
 import { avatar } from './avatar.tpl.ts';
-import { Block } from '../../core/Block/Block.ts';
+import { Block, DefaultProps } from '../../core/Block/Block.ts';
+import { withStore } from '@/core/Store/withStore.ts';
+import { IState } from '@/core/Store/store.ts';
 
-export default class Avatar extends Block {
-    constructor() {
+class Avatar extends Block {
+    constructor(props: DefaultProps) {
         super({
+            ...props,
             style: 'avatar',
         });
     }
@@ -12,3 +15,10 @@ export default class Avatar extends Block {
         return this.compile(avatar, this.props);
     }
 }
+const mapStateToProps = (state: IState) => {
+    return {
+        url: state.chats.find((chat) => chat.id === state.currentChat)?.avatar,
+    };
+};
+
+export default withStore(mapStateToProps)(Avatar);

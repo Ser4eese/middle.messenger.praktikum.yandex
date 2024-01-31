@@ -1,4 +1,7 @@
 /* eslint-disable no-unused-vars */
+
+import queryStringify from '@/utils/queryStringify';
+
 // eslint-disable-next-line no-shadow
 enum Methods {
     Get = 'Get',
@@ -6,8 +9,8 @@ enum Methods {
     Put = 'Put',
     Patch = 'Patch',
     Delete = 'Delete',
-  }
-
+}
+type HTTPMethod = <R = unknown>(url: string, options?: unknown) => Promise<R>
 export class HTTPTransport {
     static API_URL = 'https://ya-praktikum.tech/api/v2';
 
@@ -17,43 +20,44 @@ export class HTTPTransport {
         this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
     }
 
-    get<Response>(path = '/'): Promise<Response> {
-        return this.request<Response>(this.endpoint + path);
-    }
+    // eslint-disable-next-line default-param-last
+    get: HTTPMethod = (path = '/', options?: unknown) => {
+        return this.request(this.endpoint + (options ? `${path}${queryStringify(options)}` : path));
+    };
 
-    post<Response = void>(path: string, data?: unknown): Promise<Response> {
-        return this.request<Response>(this.endpoint + path, {
+    post: HTTPMethod = (path: string, data?: unknown) => {
+        return this.request(this.endpoint + path, {
             method: Methods.Post,
             data,
         });
-    }
+    };
 
-    put<Response = void>(path: string, data: unknown): Promise<Response> {
-        return this.request<Response>(this.endpoint + path, {
+    put: HTTPMethod = (path: string, data: unknown) => {
+        return this.request(this.endpoint + path, {
             method: Methods.Put,
             data,
         });
-    }
+    };
 
-    patch<Response = void>(path: string, data: unknown): Promise<Response> {
-        return this.request<Response>(this.endpoint + path, {
+    patch: HTTPMethod = (path: string, data: unknown) => {
+        return this.request(this.endpoint + path, {
             method: Methods.Patch,
             data,
         });
-    }
+    };
 
-    delete<Response>(path: string, data?: unknown): Promise<Response> {
-        return this.request<Response>(this.endpoint + path, {
+    delete: HTTPMethod = (path: string, data?: unknown) => {
+        return this.request(this.endpoint + path, {
             method: Methods.Delete,
             data,
         });
-    }
+    };
 
-    request<Response>(
+    request = <R>(
         url: string,
         options: any = { method: Methods.Get },
         timeout = 5000,
-    ): Promise<Response> {
+    ):Promise<R> => {
         const { method, data } = options;
 
         return new Promise((resolve, reject) => {
@@ -93,5 +97,5 @@ export class HTTPTransport {
                 xhr.send(JSON.stringify(data));
             }
         });
-    }
+    };
 }

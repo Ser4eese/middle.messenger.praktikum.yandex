@@ -4,10 +4,10 @@ import { withStore } from '@/core/Store/withStore';
 import { userDeleteTmpl } from './userDelete.tpl';
 import { ChatController } from '@/controllers/ChatsControllers';
 
-const getUserId = (element: HTMLElement | null): string | null => {
+const getUserId = (element: EventTarget | null): string | null => {
     if (!element) return null;
-    const userId = element.getAttribute('data-user-id');
-    return userId || getUserId(element.parentElement);
+    const userId = (element as HTMLElement).getAttribute('data-user-id');
+    return userId || getUserId((element as HTMLElement).parentElement);
 };
 
 class UserDelete extends Block {
@@ -16,7 +16,7 @@ class UserDelete extends Block {
             ...props,
             style: 'create-chat',
             events: {
-                click: async (e: any) => {
+                click: async (e: Event) => {
                     try {
                         const userId = getUserId(e.target);
                         if (userId) {

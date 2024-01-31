@@ -17,10 +17,10 @@ async function onClick(event: SubmitEvent) {
     }
 }
 
-const getUserId = (element: HTMLElement | null): string | null => {
+const getUserId = (element: EventTarget | null): string | null => {
     if (!element) return null;
-    const userId = element.getAttribute('data-user-id');
-    return userId || getUserId(element.parentElement);
+    const userId = (element as HTMLElement).getAttribute('data-user-id');
+    return userId || getUserId((element as HTMLElement).parentElement);
 };
 
 class UserEdit extends Block<{ text: string, selectedChat?: number }> {
@@ -43,7 +43,7 @@ class UserEdit extends Block<{ text: string, selectedChat?: number }> {
                 }),
             },
             events: {
-                click: async (e: any) => {
+                click: async (e: Event) => {
                     try {
                         const userId = getUserId(e.target);
                         if (userId && this.props.selectedChat) {

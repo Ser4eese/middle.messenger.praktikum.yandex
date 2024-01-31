@@ -1,15 +1,14 @@
 import { withStore } from '../../../core/Store/withStore';
 import { Block } from '../../../core/Block/Block.ts';
-import Avatar from '../../Avatar/index.ts';
 import { chatItem } from './chatItem.tpl.ts';
 import { IState } from '../../../core/Store/store';
 import { DefaultProps } from '../../../core/Block/Block';
 import { ChatController } from '../../../controllers/ChatsControllers';
 
-const getChatId = (element: HTMLElement | null): string | null => {
+const getChatId = (element: EventTarget | null): string | null => {
     if (!element) return null;
-    const chatId = element.getAttribute('data-chat');
-    return chatId || getChatId(element.parentElement);
+    const chatId = (element as HTMLElement).getAttribute('data-chat');
+    return chatId || getChatId((element as HTMLElement).parentElement);
 };
 
 class ChatItem extends Block {
@@ -17,11 +16,8 @@ class ChatItem extends Block {
         super({
             ...props,
             style: 'chats-lists__items',
-            children: {
-                avatar: new Avatar(),
-            },
             events: {
-                click: (e: any) => {
+                click: (e: Event) => {
                     const chatId = getChatId(e.target);
                     if (chatId) ChatController.selectCurrentChat(chatId);
                 },
@@ -34,9 +30,11 @@ class ChatItem extends Block {
     }
 }
 
-const mapStateToProps = (state: IState) => ({
-    chatsList: state.chats,
-});
+const mapStateToProps = (state: IState) => {
+    return {
+        chatsList: state.chats,
+    };
+};
 
 const ChatItemWithStore = withStore(mapStateToProps)(ChatItem);
 

@@ -80,7 +80,7 @@ class ChatsApi extends API {
     }
 
     getChats(_query: IGetChatsProps): Promise<IChat[]> {
-        return this.http.get();
+        return this.http.get('');
     }
 
     createChat(title: string) {
@@ -125,6 +125,13 @@ class ChatsApi extends API {
 
     getChatTokens(id: number): Promise<{token: string}> {
         return this.http.post(`/token/${id}`);
+    }
+
+    uploadChatAvatar(chatId: number, avatar: File): Promise<IChat> {
+        const formData = new FormData();
+        formData.append('chatId', `${chatId}`);
+        formData.append('avatar', avatar);
+        return this.http.put('/avatar', formData);
     }
 }
 

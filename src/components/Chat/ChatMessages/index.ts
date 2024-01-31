@@ -39,17 +39,27 @@ class ChatMessagesDefault extends Block<IChatMessagesProps> {
                     },
                 }),
                 messageCards: new MessageCard({}),
-                avatar: new Avatar(),
+                avatar: new Avatar({
+                    events: {
+                        change: async (event: any) => {
+                            const fileTarget = (event.target as HTMLInputElement).files![0];
+                            if (this.props.selectedChat) {
+                                ChatController
+                                    .uploadChatAvatar(fileTarget, +this.props.selectedChat);
+                            }
+                        },
+                    },
+                }),
                 chatInput: new ChatInput({
                     name: 'message',
                     type: 'text',
-                    required: false,
+                    required: true,
                     placeholder: 'Введите сообщение',
                 }),
                 buttonIcon: new ButtonIcon({ icon: 'send.svg' }),
             },
             events: {
-                submit: (e: any) => {
+                submit: (e: SubmitEvent) => {
                     const { message } = getFormData(e);
                     if (this.props.selectedChat) {
                         controller
@@ -67,6 +77,7 @@ class ChatMessagesDefault extends Block<IChatMessagesProps> {
 
 const mapStateToProps = (state: IState) => {
     return {
+        url: state.chats.find((chat) => chat.id === state.currentChat)?.avatar,
         chat: state.chats.find((chat) => chat.id === state.currentChat),
         selectedChat: state.currentChat,
         userId: state.user?.id,
