@@ -12,7 +12,7 @@
     "lint:fix": "npx stylelint \"**/*.scss\" --fix",
     "start": "tsc && vite build && node server.js",
     "test": "mocha",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "devDependencies": {
     "@types/chai": "^4.3.11",
