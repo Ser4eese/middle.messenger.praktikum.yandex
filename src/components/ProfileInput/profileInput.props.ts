@@ -5,4 +5,5 @@ export interface IProfileInputProps {
     type: string,
     label: string,
     rules?: string[]
+    value?: string,
 }

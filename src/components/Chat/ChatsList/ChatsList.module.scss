@@ -2,6 +2,13 @@
     background-color: $chats-list;
     border-right: 2px solid $gray-light;
 
+    &__header {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        justify-content: space-between;
+    }
+
     &__items {
         margin: 0;
         padding: 0;
@@ -9,8 +16,7 @@
 
     &__profile {
         display: flex;
-        justify-content: flex-end;
-        padding: 21px 10px;
+        align-items: center;
         text-decoration: none !important;
 
         &-arrow {

@@ -5,11 +5,48 @@
     height: 100%;
     padding: 0 20px;
 
-    &__header {
+    &-header {
         border-bottom: 2px solid $gray-light;
         padding: 10px 20px;
         display: flex;
         justify-content: space-between;
+
+        &-list {
+                position: absolute;
+                right: 0;
+                opacity: 0;
+                padding-left: 10px;
+                visibility: hidden;
+                width: 200px;
+                background-color: #fff;
+                border-radius: 12px;
+                box-shadow: 0 0 6px 0 rgb(0 0 0 / 14%);
+          
+                &::before {
+                  content: '';
+                  position: absolute;
+                  left: 0;
+                  right: 0;
+                  height: 15px;
+                  top: -12px;
+                }
+        }
+
+        &-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+
+            &-action {
+                &:hover {
+                  .chat-messages-header-list {
+                    opacity: 1;
+                    visibility: visible;
+                  }
+                }
+              }
+        }
 
         &-left {
             display: flex;
@@ -20,6 +57,7 @@
     }
 
     &__content {
+        height: 100%;
         border-bottom: 2px solid $gray-light;
         display: flex;
         flex-direction: column;

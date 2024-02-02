@@ -1,4 +1,4 @@
-import { Block } from '../../utils/block.ts';
+import { Block } from '../../core/Block/Block.ts';
 import { validate } from '../../utils/validation.ts';
 import { IProfileInputProps } from './profileInput.props.ts';
 import { profileInput } from './profileInput.tpl.ts';

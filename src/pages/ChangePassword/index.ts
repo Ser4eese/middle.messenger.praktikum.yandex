@@ -1,17 +1,15 @@
 import { tmpl } from './ChangePassword.tpl';
-import { Block } from '../../utils/block.ts';
+import { Block } from '../../core/Block/Block.ts';
 import Button from '../../components/Button/index.ts';
 import ProfileInput from '../../components/ProfileInput/index.ts';
 import { getFormData } from '../../utils/getFormData.ts';
+import { withStore } from '../../core/Store/withStore.ts';
+import { IState } from '../../core/Store/store.ts';
+import { UserController } from '../../controllers/UserControllers.ts';
+import { Routes } from '../../main.ts';
+import { router } from '../../core/Router/Router.ts';
+import { IChangePassword } from '@/api/UserApi.ts';
 
-const user = {
-    login: 'ivanivanov',
-    first_name: 'Иван',
-    second_name: 'Иванов',
-    phone: '+7 (909) 967 30 30',
-    email: 'pochta@yandex.ru',
-    display_name: 'test',
-};
 const type = 'password';
 const profileInputProps = [{
     name: 'oldPassword',
@@ -38,19 +36,30 @@ const profileInputProps = [{
     rules: ['password-valid'],
 },
 ];
-export default class ChangePassword extends Block {
-    constructor() {
+
+function onSubmit(event: SubmitEvent) {
+    try {
+        const data = getFormData(event);
+        UserController.changePassword(data as unknown as IChangePassword);
+        router.go(Routes.Profile);
+    } catch (e) {
+        if (e instanceof Error && 'reason' in e) console.error(e.reason);
+    }
+}
+
+class BaseChangePassword extends Block {
+    constructor(props: any) {
         super({
             style: 'profile',
-            user,
+            ...props,
             children: {
-                profileInput: profileInputProps.map((props) => new ProfileInput(props)),
+                profileInput: profileInputProps.map((inputProps) => new ProfileInput(inputProps)),
                 button: new Button({
                     text: 'Сохранить',
                 }),
             },
             events: {
-                submit: getFormData,
+                submit: onSubmit,
             },
         });
     }
@@ -59,3 +68,10 @@ export default class ChangePassword extends Block {
         return this.compile(tmpl, this.props);
     }
 }
+
+const mapStateToProps = (state: IState) => ({
+    first_name: state.user?.first_name,
+    avatar: state.user?.display_name,
+});
+
+export const ChangePassword = withStore(mapStateToProps)(BaseChangePassword);

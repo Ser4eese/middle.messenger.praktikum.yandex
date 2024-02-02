@@ -3,6 +3,7 @@
     padding: 10px;
     display: flex;
     gap: 10px;
+    height: 38px;
 
     &__content {
         width: 100%;
@@ -15,5 +16,14 @@
                 font-weight: 600;
             }
         }
+    }
+
+    &:hover {
+        background-color: $gray-light;
+    }
+
+    &:active {
+        background-color: $chats-list;
+
     }
 }

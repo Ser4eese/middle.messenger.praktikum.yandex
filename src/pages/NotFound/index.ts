@@ -1,5 +1,5 @@
 import { tmpl } from './notFound.tpl';
-import { Block } from '../../utils/block.ts';
+import { Block } from '../../core/Block/Block.ts';
 
 export default class NotFound extends Block {
     constructor() {

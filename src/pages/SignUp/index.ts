@@ -1,10 +1,12 @@
 import { tmpl } from './SignUp.tpl.ts';
 
-import { Block } from '../../utils/block.ts';
+import { Block } from '../../core/Block/Block.ts';
 import Input from '../../components/Input/index.ts';
 import Button from '../../components/Button/index.ts';
 import { getFormData } from '../../utils/getFormData.ts';
-import { IInputProps } from '@/components/Input/input.props.ts';
+import { IInputProps } from '../../components/Input/input.props.ts';
+import { AuthController } from '../../controllers/AuthControllers.ts';
+import { ISignupData } from '@/api/AuthApi.ts';
 
 const type = 'text';
 const required = true;
@@ -30,12 +32,21 @@ const input: IInputProps[] = [{
     name: 'password', type, title: 'Пароль (ещё раз)', required, rules: ['password-valid'],
 },
 ];
+function onSubmit(event: SubmitEvent) {
+    try {
+        const data = getFormData(event);
+        AuthController.signup(data as unknown as ISignupData);
+    } catch (e) {
+        if (e instanceof Error && 'reason' in e)console.error(e.reason);
+    }
+}
+
 export default class SignUp extends Block {
     constructor() {
         super({
             style: 'register-container',
             events: {
-                submit: getFormData,
+                submit: onSubmit,
             },
             children: {
                 inputs: input.map((inputData) => new Input({ ...inputData })),

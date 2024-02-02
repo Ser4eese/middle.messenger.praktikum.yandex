@@ -1,65 +1,71 @@
 import { tmpl } from './chatMessages.tpl';
-import { Block } from '../../../utils/block.ts';
-import Avatar from '../../Avatar/index.ts';
-import ChatInput from '../ChatInput/index.ts';
-import { type IMessageCardProps } from '../MessageCard/messageCard.props.ts';
-import MessageCard from '../MessageCard/index.ts';
-import { IChatMessagesProps } from './ChatMessages.props.ts';
+import { Block, DefaultProps } from '../../../core/Block/Block';
+import Avatar from '../../Avatar/index';
+import ChatInput from '../ChatInput/index';
+import MessageCard from '../MessageCard/index';
+import { IChatMessagesProps } from './ChatMessages.props';
+import { IState, PopupTypes } from '../../../core/Store/store';
+import { withStore } from '../../../core/Store/withStore';
+import ButtonIcon from '../../../components/ButtonIcon/index';
+import { getFormData } from '../../../utils/getFormData';
+import controller from '../../../controllers/MessageControllers';
+import ButtonText from '../../../components/ButtonText/index';
+import { PopupController } from '@/controllers/PopupController';
+import { ChatController } from '@/controllers/ChatsControllers';
 
-const messageList: IMessageCardProps[] = [
-    { date: '15:56', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', isAuthor: true },
-    { date: '16:56', text: 'Привет', isAuthor: false },
-    { date: '17:56', text: 'Привет', isAuthor: true },
-    { date: '18:56', text: 'Привет', isAuthor: false },
-    { date: '15:56', text: 'Привет', isAuthor: true },
-    { date: '16:56', text: 'Привет', isAuthor: false },
-    { date: '17:56', text: 'Привет', isAuthor: true },
-    { date: '18:56', text: 'Привет', isAuthor: false },
-    { date: '15:56', text: 'Привет', isAuthor: true },
-    { date: '16:56', text: 'Привет', isAuthor: false },
-    { date: '17:56', text: 'Привет', isAuthor: true },
-    { date: '18:56', text: 'Привет', isAuthor: false },
-    { date: '15:56', text: 'Привет', isAuthor: true },
-    { date: '16:56', text: 'Привет', isAuthor: false },
-    { date: '17:56', text: 'Привет', isAuthor: true },
-    { date: '18:56', text: 'Привет', isAuthor: false },
-    { date: '15:56', text: 'Привет', isAuthor: true },
-    { date: '16:56', text: 'Привет', isAuthor: false },
-    { date: '17:56', text: 'Привет', isAuthor: true },
-    { date: '18:56', text: 'Привет', isAuthor: false },
-    { date: '15:56', text: 'Привет', isAuthor: true },
-    { date: '16:56', text: 'Привет', isAuthor: false },
-    { date: '17:56', text: 'Привет', isAuthor: true },
-    { date: '18:56', text: 'Привет', isAuthor: false },
-    { date: '15:56', text: 'Привет', isAuthor: true },
-    { date: '16:56', text: 'Привет', isAuthor: false },
-    { date: '17:56', text: 'Привет', isAuthor: true },
-    { date: '18:56', text: 'Привет', isAuthor: false },
-    { date: '15:56', text: 'Привет', isAuthor: true },
-    { date: '16:56', text: 'Привет', isAuthor: false },
-    { date: '17:56', text: 'Привет', isAuthor: true },
-    { date: '18:56', text: 'Привет', isAuthor: false },
-    { date: '15:56', text: 'Привет', isAuthor: true },
-    { date: '16:56', text: 'Привет', isAuthor: false },
-    { date: '17:56', text: 'Привет', isAuthor: true },
-    { date: '18:56', text: 'Привет', isAuthor: false },
-];
-
-export default class ChatMessages extends Block<IChatMessagesProps> {
-    constructor(props: IChatMessagesProps) {
+class ChatMessagesDefault extends Block<IChatMessagesProps> {
+    constructor(props: IChatMessagesProps & DefaultProps) {
         super({
-            style: 'chat-messages',
             ...props,
+            style: 'chat-messages',
             children: {
-                messageCards: messageList
-                    .map((messageCardProps) => new MessageCard(messageCardProps)),
-                avatar: new Avatar(),
+                addUser: new ButtonText({
+                    text: 'Добавить',
+                    events: {
+                        click: async () => {
+                            PopupController.open(PopupTypes.ADD_USER);
+                        },
+                    },
+                }),
+                deleteUser: new ButtonText({
+                    text: 'Удалить',
+                    events: {
+                        click: async () => {
+                            if (this.props.selectedChat) {
+                                await ChatController.getUsers(this.props.selectedChat);
+                                PopupController.open(PopupTypes.DELETE_USER);
+                            }
+                        },
+                    },
+                }),
+                messageCards: new MessageCard({}),
+                avatar: new Avatar({
+                    events: {
+                        change: async (event: any) => {
+                            const fileTarget = (event.target as HTMLInputElement).files![0];
+                            if (this.props.selectedChat) {
+                                ChatController
+                                    .uploadChatAvatar(fileTarget, +this.props.selectedChat);
+                            }
+                        },
+                    },
+                }),
                 chatInput: new ChatInput({
                     name: 'message',
                     type: 'text',
-                    required: false,
+                    required: true,
                     placeholder: 'Введите сообщение',
                 }),
+                buttonIcon: new ButtonIcon({ icon: 'send.svg' }),
+            },
+            events: {
+                submit: (e: SubmitEvent) => {
+                    const { message } = getFormData(e);
+                    if (this.props.selectedChat) {
+                        controller
+                            .sendMessage(this.props.selectedChat, message);
+                    }
+                },
             },
         });
     }
@@ -68,3 +74,14 @@ export default class ChatMessages extends Block<IChatMessagesProps> {
         return this.compile(tmpl, this.props);
     }
 }
+
+const mapStateToProps = (state: IState) => {
+    return {
+        url: state.chats.find((chat) => chat.id === state.currentChat)?.avatar,
+        chat: state.chats.find((chat) => chat.id === state.currentChat),
+        selectedChat: state.currentChat,
+        userId: state.user?.id,
+    };
+};
+
+export default withStore(mapStateToProps)(ChatMessagesDefault);

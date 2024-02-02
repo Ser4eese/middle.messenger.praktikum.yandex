@@ -7,6 +7,7 @@ body, html {
     text-decoration: none;
     text-align: center;
     color: $link;
+    cursor: pointer;
 }
 
 .link.profile-link {
@@ -29,4 +30,18 @@ body, html {
     text-overflow: ellipsis;
     display: flex;
     align-items: center;
+}
+
+.button-text {
+    cursor: pointer;
+}
+
+.button-send {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }

@@ -1,0 +1,18 @@
+.button {
+    padding: 10px;
+    color: white;
+    background-color: $main;
+    border-radius: 5px;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    outline: 0;
+    border: 0;
+    margin: 0;
+
+    &__content {
+        display: flex;
+        gap: 4px;
+    }
+}

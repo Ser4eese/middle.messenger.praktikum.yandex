@@ -4,7 +4,7 @@ export const tmpl = `<div class="profile__back">
     <Form class="profile__container">
         <div class="profile__container-avatar">
             <img alt="icon" src="empty-avatar.svg" />
-            {{user.first_name}}
+            {{first_name}}
         </div>
         <div class="profile__container-data">
         {{{profileInput}}}
