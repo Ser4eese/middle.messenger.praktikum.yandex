@@ -1,3 +1,5 @@
+/* global describe */
+/* eslint no-undef: "error" */
 import { assert } from 'chai';
 import { test } from 'mocha';
 import { Block } from './Block';
@@ -27,9 +29,9 @@ describe('Block', () => {
 
     test('should render given props', () => {
         testBlock.setProps({
-            content: 'Some important message for future'
+            content: 'Some important message for future',
         });
 
         assert.equal(testBlock.getContent()?.innerHTML, 'Some important message for future');
     });
-})
+});

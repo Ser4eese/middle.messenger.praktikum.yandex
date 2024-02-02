@@ -67,10 +67,9 @@ export class Router {
     getRoute(pathname: string) {
         return this.routes.find((route) => route.match(pathname));
     }
-    public reset() {
-        delete this.__instance;
 
-        new Router(this._rootQuery);
+    destroy() {
+        this.__instance = undefined;
     }
 }
 

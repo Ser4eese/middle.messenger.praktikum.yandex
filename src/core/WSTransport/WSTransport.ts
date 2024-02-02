@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+/* global NodeJS */
+/* eslint no-undef: "error" */
 import EventBus from '../EventBus/EventBus';
 
 // eslint-disable-next-line no-shadow
@@ -12,7 +14,7 @@ export enum WSTransportEvents {
 export default class WSTransport extends EventBus {
     private socket: WebSocket | null = null;
 
-    private pingInterval: number = 0;
+    private pingInterval: number | NodeJS.Timeout = 0;
 
     constructor(private url: string) {
         super();

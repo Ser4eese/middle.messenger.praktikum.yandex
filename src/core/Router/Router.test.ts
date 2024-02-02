@@ -1,5 +1,7 @@
+/* global describe, afterEach, it */
+/* eslint no-undef: "error" */
 import { expect } from 'chai';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 import { router } from './Router';
 
 describe('Router', () => {
@@ -14,8 +16,8 @@ describe('Router', () => {
         }
     };
 
-    beforeEach(() => {
-        router.reset();
+    afterEach(() => {
+        router.destroy();
     });
 
     const getContentFake = sinon.fake.returns(document.createElement('div'));
