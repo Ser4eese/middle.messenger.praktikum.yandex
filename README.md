@@ -15,7 +15,6 @@
 - [Страница 404](https://deploy--musical-lokum-4d335c.netlify.app/not-found)
 - [Страница 5**](https://deploy--musical-lokum-4d335c.netlify.app/error)
 
-
 ## Установка
 
 - `npm install` — установка стабильной версии,
