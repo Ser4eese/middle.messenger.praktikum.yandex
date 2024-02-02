@@ -1,6 +1,6 @@
 {
     "extension": [".ts"],
-    "spec": " ./src/**/*.test.ts",
+    "spec": "./src/**/*.test.ts",
     "require": ["./mochaSetup.js"],
     "node-option": [
         "loader=esmock",
