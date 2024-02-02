@@ -47,41 +47,5 @@
     "nanoid": "^5.0.2",
     "sinon": "^17.0.1",
     "vite-plugin-handlebars": "^1.6.0"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.(tsx|jsx)": "npm run lint",
-    "*.scss": "npm run stylelint"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "rules": {
-      "header-max-length": [
-        2,
-        "always",
-        120
-      ],
-      "type-enum": [
-        2,
-        "always",
-        [
-          "breaking",
-          "feat",
-          "fix",
-          "refactor",
-          "config",
-          "test",
-          "docs",
-          "no-release"
-        ]
-      ]
-    }
   }
 }
