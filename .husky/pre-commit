@@ -1,1 +1,1 @@
-npm test
+npm run eslint:ts && npm run lint:scss && npm run test

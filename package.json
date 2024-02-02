@@ -47,10 +47,5 @@
     "nanoid": "^5.0.2",
     "sinon": "^17.0.1",
     "vite-plugin-handlebars": "^1.6.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run eslint:fix && npm run eslint:ts && npm run lint:fix && npm run lint:scss && npm run test"
-    }
   }
 }
