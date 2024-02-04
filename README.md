@@ -15,7 +15,6 @@
 - [Страница 404](https://deploy--musical-lokum-4d335c.netlify.app/not-found)
 - [Страница 5**](https://deploy--musical-lokum-4d335c.netlify.app/error)
 
-
 ## Установка
 
 - `npm install` — установка стабильной версии,
@@ -26,3 +25,4 @@
 - `eslint:fix` — исправление тс файлов линтером
 - `lint:scss` — проверка scss файлов линтером
 - `lint:fix` — исправление scss файлов линтером
+- `test` — запуск тестов

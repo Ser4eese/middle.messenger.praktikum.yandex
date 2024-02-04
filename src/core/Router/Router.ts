@@ -67,6 +67,10 @@ export class Router {
     getRoute(pathname: string) {
         return this.routes.find((route) => route.match(pathname));
     }
+
+    destroy() {
+        this.__instance = undefined;
+    }
 }
 
 export const router = new Router();

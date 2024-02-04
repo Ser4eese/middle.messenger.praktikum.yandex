@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 
-import queryStringify from '@/utils/queryStringify';
+import queryStringify from '../../utils/queryStringify';
 
 // eslint-disable-next-line no-shadow
-enum Methods {
+export enum Methods {
     Get = 'Get',
     Post = 'Post',
     Put = 'Put',
